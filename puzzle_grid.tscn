@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvp3xd5ipyxtw"]
+
+[ext_resource type="Script" uid="uid://cq3ru50ox1v3k" path="res://puzzle_grid.gd" id="1_nef7l"]
+
+[node name="PuzzleGrid" type="Node3D"]
+script = ExtResource("1_nef7l")
+
+[node name="GridBase" type="CSGCombiner3D" parent="."]
+
+[node name="Base" type="CSGBox3D" parent="GridBase"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)
+size = Vector3(1, 0.05, 1)
+
+[node name="CellTemplate" type="CSGBox3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.05, 0.03, 0.05)
+visible = false
+operation = 2
+size = Vector3(0.09, 0.02, 0.09)

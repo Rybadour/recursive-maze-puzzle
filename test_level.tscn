@@ -1,0 +1,96 @@
+[gd_scene load_steps=12 format=3 uid="uid://dakvn4gltns0p"]
+
+[ext_resource type="PackedScene" uid="uid://cvp3xd5ipyxtw" path="res://puzzle_grid.tscn" id="1_4ptq8"]
+[ext_resource type="Script" uid="uid://d2mmnagt3ahpo" path="res://addons/srcoder_fps_controller/assets/scripts/player.gd" id="1_f7g2b"]
+[ext_resource type="PackedScene" uid="uid://xvirvni0l0oy" path="res://addons/srcoder_fps_controller/mouse_lock.tscn" id="2_1c2mv"]
+[ext_resource type="Material" uid="uid://xksju4002ur7" path="res://addons/srcoder_fps_controller/assets/materials/white.material" id="2_4ptq8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hsoxx"]
+albedo_color = Color(0, 0.2680082, 0.26837197, 1)
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hsoxx"]
+
+[sub_resource type="Sky" id="Sky_gojnm"]
+sky_material = SubResource("ProceduralSkyMaterial_hsoxx")
+
+[sub_resource type="Environment" id="Environment_hsoxx"]
+background_mode = 2
+background_energy_multiplier = 0.82
+sky = SubResource("Sky_gojnm")
+ssao_enabled = true
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_gojnm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_sb12i"]
+radius = 0.3
+height = 1.6
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gbhdq"]
+radius = 0.3
+height = 1.6
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Level" type="Node3D" parent="."]
+
+[node name="Floor" type="CSGBox3D" parent="Level"]
+use_collision = true
+size = Vector3(6, 0.1, 6)
+material = SubResource("StandardMaterial3D_hsoxx")
+
+[node name="Table" type="CSGBox3D" parent="Level"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.86870784, 0)
+use_collision = true
+size = Vector3(1.1, 0.05, 1.1)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Level/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.4869941, -0.4248859, 0.4863329)
+size = Vector3(0.1, 0.8, 0.1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Level/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.48521662, -0.42388183, 0.4863329)
+size = Vector3(0.1, 0.8, 0.1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Level/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4859606, -0.42430043, -0.4844308)
+size = Vector3(0.1, 0.8, 0.1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Level/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.48925006, -0.42430043, -0.4844308)
+size = Vector3(0.1, 0.8, 0.1)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="Level"]
+transform = Transform3D(0.9370506, 0.2142158, -0.2757676, 0.101021394, 0.589656, 0.80131173, 0.33426163, -0.77872807, 0.5308972, -4.045367, 8.219772, 6.514283)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Level"]
+environment = SubResource("Environment_hsoxx")
+camera_attributes = SubResource("CameraAttributesPractical_gojnm")
+
+[node name="PuzzleGrid" parent="Level" instance=ExtResource("1_4ptq8")]
+transform = Transform3D(-0.76682913, 0, 0.6418513, 0, 1, 0, -0.6418513, 0, -0.76682913, 0.1474065, 0.95711637, 0.5016728)
+numRows = 5
+numCols = 3
+
+[node name="Player" type="CharacterBody3D" parent="."]
+physics_interpolation_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.10191, 2.110954)
+script = ExtResource("1_f7g2b")
+
+[node name="PlayerMesh" type="MeshInstance3D" parent="Player"]
+visible = false
+material_override = ExtResource("2_4ptq8")
+gi_mode = 0
+mesh = SubResource("CapsuleMesh_sb12i")
+surface_material_override/0 = ExtResource("2_4ptq8")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("CapsuleShape3D_gbhdq")
+
+[node name="CameraPivot" type="Node3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.49559, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Player/CameraPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015572071, -0.07151866)
+
+[node name="MouseLock" parent="Player" instance=ExtResource("2_1c2mv")]
