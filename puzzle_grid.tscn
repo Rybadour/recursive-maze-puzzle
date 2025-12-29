@@ -6,6 +6,7 @@
 script = ExtResource("1_nef7l")
 
 [node name="GridBase" type="CSGCombiner3D" parent="."]
+use_collision = true
 
 [node name="Base" type="CSGBox3D" parent="GridBase"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.5)

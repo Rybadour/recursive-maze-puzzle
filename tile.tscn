@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bhdlhan5fatm2"]
+
+[node name="Tile" type="Node3D"]
+
+[node name="Base" type="CSGBox3D" parent="."]
+size = Vector3(4, 0.1, 4)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+
+[node name="Walls" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(4, 1, 4)
+
+[node name="Hallway" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7875366, 0.55811656, 0)
+operation = 2
+size = Vector3(2.5750732, 1, 1)
+
+[node name="Hallway2" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.009180341, 0, 0.99995786, 0, 1, 0, -0.99995786, 0, -0.009180341, -0.16452792, 0.55811656, -0.8014018)
+operation = 2
+size = Vector3(2.5961304, 1, 1)
